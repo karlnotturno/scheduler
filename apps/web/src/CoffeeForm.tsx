@@ -68,7 +68,7 @@ export default function CoffeeForm() {
       <ul>
         {coffees.map((c, i) => (
           <li key={i}>
-            {c.requesterName} – {c.requestedLocation} at {new Date(c.requestedTime).toLocaleString()}
+            {c.requesterName} – {c.requestedLocation} at {new Date(c.requestedTime).toISOString()}
           </li>
         ))}
       </ul>
