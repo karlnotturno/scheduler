@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+const baseUrl = import.meta.env.VITE_API_URL;
+
 interface Coffee {
   requesterName: string;
   requesterEmail: string;
@@ -32,7 +34,7 @@ export default function CoffeeForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch('/api/coffees', {
+    const res = await fetch(`${baseUrl}/api/coffees`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
