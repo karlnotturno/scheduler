@@ -37,7 +37,7 @@ export default function CoffeeForm() {
     const res = await fetch(`${baseUrl}/api/coffees`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
+      body: JSON.stringify({...formData, requestedTime: new Date(formData.requestedTime).toISOString()})
     });
 
     if (res.ok) {
@@ -68,7 +68,7 @@ export default function CoffeeForm() {
       <ul>
         {coffees.map((c, i) => (
           <li key={i}>
-            {c.requesterName} – {c.requestedLocation} at {new Date(c.requestedTime).toISOString()}
+            {c.requesterName} – {c.requestedLocation} at {new Date(c.requestedTime).toLocaleString()}
           </li>
         ))}
       </ul>
