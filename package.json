@@ -1,0 +1,17 @@
+{
+  "name": "hill-scheduler",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev:web": "pnpm --filter web dev",
+    "dev:server": "pnpm --filter server dev",
+    "dev:db": "mongod --dbpath=./db",
+    "dev": "concurrently -n web,server -c blue,green \"pnpm dev:web\" \"pnpm dev:server\""
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
