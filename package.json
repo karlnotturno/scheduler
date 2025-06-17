@@ -6,7 +6,9 @@
     "dev:web": "pnpm --filter web dev",
     "dev:server": "pnpm --filter server dev",
     "dev:db": "mongod --dbpath=./db",
-    "dev": "concurrently -n web,server -c blue,green \"pnpm dev:web\" \"pnpm dev:server\""
+    "dev": "concurrently -n web,server -c blue,green \"pnpm dev:web\" \"pnpm dev:server\"",
+    "predeploy": "pnpm --filter web build",
+    "deploy": "pnpm --filter web deploy "
   },
   "workspaces": [
     "apps/*"
