@@ -20,7 +20,7 @@ export default function CoffeeForm() {
   const [coffees, setCoffees] = useState<Coffee[]>([]);
 
   useEffect(() => {
-    fetch('/api/coffees')
+    fetch(`${baseUrl}/api/coffees`)
       .then(res => res.json())
       .then(setCoffees);
   }, []);
