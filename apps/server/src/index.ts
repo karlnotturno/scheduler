@@ -1,5 +1,6 @@
 import express from 'express';
 import logger from 'morgan';
+import cors from 'cors';
 import mongoose from 'mongoose';
 
 import coffeesRouter from './routes/coffees'
@@ -8,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(logger('dev'));
+app.use(cors({origin: ['https://coffee.kstreet.show'], credentials: true}))
 app.use(express.json());
 
 app.get('/', (_req, res) => {
