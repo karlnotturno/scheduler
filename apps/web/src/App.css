@@ -1,0 +1,202 @@
+.left-panel {
+  position: fixed;
+  width: 30%;
+  height: 100%;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(50px);
+  z-index: 1;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: background-color 1s ease, backdrop-filter 1s ease, opacity 1s ease, color 1s ease;
+  font-family: "Bellefair", serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #072E4A;
+  box-shadow: 4px 0 6px -2px rgba(0, 0, 0, 0.2);
+}
+
+.left-panel::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(180deg, #2C3B49 0%, #483732 15%, #5F311D 30%, #623012 45%, #342920 60%, #222520 75%, #2B2519 90%, #472D17 100%);
+  mix-blend-mode: lighten;
+}
+
+.coffee {
+  width: 280px;
+}
+
+.coffee h1 {
+  user-select: none;
+  font-size: 38px;
+}
+
+.coffee input {
+  margin-top: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Bellefair", serif;
+  font-size: 22px;
+  color: #072E4A;
+
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #072E4A;
+
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.valid {
+  border-bottom: 2px solid #19865C !important; 
+}
+
+.invalid {
+  border-bottom: 2px solid #D9822B !important;
+}
+
+.coffee input::placeholder {
+  color: #072E4A;
+  opacity: 0.6;
+}
+
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(5px);
+  animation: fadeIn 0.6s ease forwards;
+  animation-delay: 0.15s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.email-warning-container {
+  min-height: 0;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease, margin-top 0.3s ease;
+  font-size: 1.1em;
+}
+
+.email-warning-container.show {
+  height: 94px;
+  margin-top: 12px;
+}
+
+code {
+  font-family: monospace;
+  background-color: rgba(0, 0, 0, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  font-size: 0.8em;
+}
+
+.email-submit-container {
+  min-height: 0;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease, margin-top 0.3s ease;
+}
+
+.email-submit-container.show {
+  height: 100px; /* TODO: We will likely want to change this back to 50px once we removing the testing button */
+  margin-top: 30px;
+}
+
+.email-submit-container button {
+  font-family: "Bellefair", serif;
+  background: transparent;
+  border: 2px solid #072E4A; 
+  color: #072E4A;
+  font-size: 20px;
+  padding: 5px 20px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  margin-bottom: 10px;
+}
+
+.email-submit-container button:hover {
+  background: #072E4A;
+  color: #ffffff;
+}
+
+.right-panel {
+  position: absolute;
+  top: 0;
+  left: 20vw;
+  width: 80vw;
+  height: 100vh;
+
+  background-image: url('/capitol.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-position: top center;
+}
+
+@media (max-width: 1100px) {
+  .left-panel {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(7, 46, 74, 0.3);
+    backdrop-filter: blur(2px);
+    color: #ffffff;
+  }
+
+  .left-panel::before {
+    content: none;
+  }
+
+  .right-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .coffee input {
+    color: #ffffff;
+  
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #ffffff;
+  
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  
+  .coffee input::placeholder {
+    color: #75a3c4;
+    opacity: 0.6;
+  }
+
+  code {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .email-submit-container button {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .email-submit-container button:hover {
+    background: #ffffff;
+    color: #072E4A;
+  }
+  
+}
