@@ -1,8 +1,10 @@
+const baseUrl = import.meta.env.VITE_API_URL;
+
 export default function Verify() {
 
   const verify = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/emails', {
+      const response = await fetch(`${baseUrl}api/emails`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
