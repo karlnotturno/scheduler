@@ -1,9 +1,10 @@
-import Verify from './Verify'
-
 import {useState} from 'react';
 
 import './reset.css'
 import './App.css'
+
+const baseUrl = import.meta.env.VITE_API_URL;
+
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
 
   const verify = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/emails', {
+      const response = await fetch(`${baseUrl}/api/emails`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -80,7 +81,6 @@ function App() {
         </div>
       </div>
       <div className='right-panel' />
-      <Verify />
     </>
   )
 }
