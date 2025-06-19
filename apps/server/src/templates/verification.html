@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Verification Code</title>
+
+    <!-- Force light mode in iOS Mail -->
+    <meta name="color-scheme" content="light only" />
+    <meta name="supported-color-schemes" content="light" />
+
+    <!-- Optional custom font -->
+    <link href="https://fonts.googleapis.com/css2?family=Bellefair&display=swap" rel="stylesheet" />
+
+    <style>
+      @media (prefers-color-scheme: dark) {
+        body, table, td, p, div, a {
+          color: #ffffff !important;
+          background-color: #C67E18 !important;
+        }
+      }
+    </style>
+  </head>
+  <body style="margin:0; padding:0; background-color:#C67E18 !important; color: #ffffff !important; font-family: 'Bellefair', Georgia, serif; -webkit-font-smoothing: antialiased; color-scheme: light; supported-color-schemes: light;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#C67E18" style="background-color:#C67E18 !important; color-scheme: light; supported-color-schemes: light;">
+      <tr>
+        <td align="center" style="padding: 60px 0 20px;">
+          <!-- Dome Image -->
+          <img src="cid:emailImage" alt="Capitol Dome" width="200" style="display:block; margin: 0 auto 40px;" />
+        </td>
+      </tr>
+
+      <tr>
+        <td align="center">
+          <p style="color: #ffffff !important; font-size: 28px; margin: 0 0 14px;">Your verification code is:</p>
+          <div style="display: inline-block; padding: 8px 16px; background-color: #00000020 !important; border-radius: 6px; font-size: 28px; font-weight: bold; font-family: Menlo, 'Courier New', monospace; color: #ffffff !important;">
+            {{code}}
+          </div>
+          <p style="color: #ffffff !important; margin: 30px 0 0; font-size: 20px;">This code will expire in 10 minutes.</p>
+        </td>
+      </tr>
+
+      <!-- Footer -->
+      <tr>
+        <td align="center" style="padding: 40px 20px 60px; font-size: 16px; color: #ffffff !important;">
+          <a href="https://coffee.kstreet.show" style="color: #ffffff !important; text-decoration: none;">Coffee at K Street</a><br />
+          Need help? Contact <a href="mailto:verify@kstreet.show" style="color: #ffffff !important;">verify@kstreet.show</a>.
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
