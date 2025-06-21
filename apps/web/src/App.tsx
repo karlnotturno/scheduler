@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
-import './reset.css'
-import './App.css'
+import './reset.css';
+import './App.css';
 
 const baseUrl = import.meta.env.VITE_API_URL;
 
@@ -85,4 +85,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

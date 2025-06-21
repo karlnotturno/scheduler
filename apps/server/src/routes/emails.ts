@@ -54,4 +54,14 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.get('/', async (req, res) => {
+  const emails = await User.find().sort({createdAt: -1});
+  res.json(emails)
+})
+
+router.delete('/', async (req, res) => {
+  const emails = await User.find().deleteMany();
+  res.json('deleted')
+})
+
 export default router;

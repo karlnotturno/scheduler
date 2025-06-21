@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   }
 })
 
-router.get('/', async (requestAnimationFrame, res) => {
+router.get('/', async (req, res) => {
   const coffees = await Coffee.find().sort({createdAt: -1});
   res.json(coffees);
 })
