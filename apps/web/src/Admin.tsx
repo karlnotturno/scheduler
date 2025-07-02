@@ -8,7 +8,7 @@ function Admin () {
 
   useEffect(() => {
     try {
-      fetch(`${baseUrl}/api/emails`)
+      fetch(`${baseUrl}/api/verify`)
       .then(res => res.json())
       .then(setEmails);
     } catch (err) {
@@ -16,9 +16,9 @@ function Admin () {
     }
   }, []);
 
-  const deleteEmails = () => {
+  const deleteVerifications = () => {
     try {
-      fetch(`${baseUrl}/api/emails`, {method: 'DELETE'})
+      fetch(`${baseUrl}/api/verify`, {method: 'DELETE'})
     } catch (err) {
       console.log(err)
     }
@@ -27,7 +27,7 @@ function Admin () {
   return (
     <>
       {JSON.stringify(emails)}
-      <button onClick={deleteEmails}>Delete</button>
+      <button onClick={deleteVerifications}>Delete</button>
     </>
   )
 }

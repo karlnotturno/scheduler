@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {User} from '../models/User';
+import {Verify, User} from '../models/User';
 import nodemailer from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import fs from 'fs';
@@ -16,25 +16,26 @@ const transporter = nodemailer.createTransport({
   }
 } as SMTPTransport.Options);
 
-router.post('/', async (req, res) => {
-  const { to } = req.body;
+router.post('/send-email', async (req, res) => {
+  const { email } = req.body;
 
-  const verify = Math.floor(100000 + Math.random() * 900000).toString();
+  const code = Math.floor(100000 + Math.random() * 900000).toString();
 
   try {
-    const user = new User({ email: to, verify });
-    await user.save();
+    await Verify.find({email}).deleteMany()
+    const verify = new Verify({ email, code });
+    await verify.save();
 
     // Load and inject code into HTML template
     const htmlPath = path.join(__dirname, '..', 'templates', 'verification.html');
     const rawHtml = fs.readFileSync(htmlPath, 'utf8');
-    const html = rawHtml.replace('{{code}}', verify);
+    const html = rawHtml.replace('{{code}}', code);
 
     const info = await transporter.sendMail({
       from: '"Coffee at K Street" <verify@kstreet.show>',
-      to,
-      subject: 'Coffee Verification Code',
-      text: `Your verification code is ${verify}`,
+      to: email,
+      subject: `Coffee Verification Code: ${code}`,
+      text: `Your verification code is ${code}.`,
       html,
       attachments: [
         {
@@ -54,14 +55,24 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/', async (req, res) => {
-  const emails = await User.find().sort({createdAt: -1});
-  res.json(emails)
+router.post('/check-code', async (req, res) => {
+  const { email, code } = req.body;
+  const verify = await Verify.find({email, code})
+  console.log(verify)
+  if (verify.length === 1){
+    await Verify.find({email, code}).deleteMany();
+    res.status(200).json('Verified')
+  } else res.status(401).json('Not verified');
 })
 
-router.delete('/', async (req, res) => {
-  const emails = await User.find().deleteMany();
-  res.json('deleted')
-})
+// router.get('/', async (req, res) => {
+//   const emails = await User.find().sort({createdAt: -1});
+//   res.json(emails)
+// })
+
+// router.delete('/', async (req, res) => {
+//   const emails = await User.find().deleteMany();
+//   res.json('deleted')
+// })
 
 export default router;

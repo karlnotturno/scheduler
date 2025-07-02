@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
 dotenv.config();
 
 import coffeesRouter from './routes/coffees'
-import emailsRouter from './routes/emails'
+import verifyRouter from './routes/verify'
 
 
 const app = express();
@@ -24,7 +24,7 @@ app.get('/', (_req, res) => {
 });
 
 app.use('/api/coffees', coffeesRouter);
-app.use('/api/emails', emailsRouter);
+app.use('/api/verify', verifyRouter);
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/hill-scheduler';
 

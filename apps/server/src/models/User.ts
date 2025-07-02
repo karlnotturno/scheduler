@@ -2,19 +2,25 @@ import { Schema, model, Document } from 'mongoose';
 
 export interface IVerify extends Document {
   email: string;
-  verify?: string;
+  code?: string;
   createdAt: Date;
 }
 
 export interface IUser extends Document {
   email: string;
-  verify?: string;
+  track: 'Operations' | 'Press' | 'Legislative' | 'All';
 }
 
-const UserSchema = new Schema<IVerify>({
+const VerifySchema = new Schema<IVerify>({
   email: {type: String, required: true},
-  verify: {type: String},
-  // createdAt: { type: Date, default: Date.now, expires: 600}
+  code: {type: String, required: true},
+  createdAt: { type: Date, default: Date.now, expires: 600}
 })
 
-export const User = model<IVerify>('User', UserSchema)
+const UserSchema = new Schema<IUser>({
+  email: {type: String, required: true},
+  track: {type: String}
+})
+
+export const Verify = model<IVerify>('verify', VerifySchema)
+export const User = model<IUser>('user', UserSchema)
