@@ -5,6 +5,10 @@ import SMTPTransport from 'nodemailer/lib/smtp-transport';
 import fs from 'fs';
 import path from 'path';
 
+import jwt from 'jsonwebtoken';
+
+const JWT_SECRET = process.env.JWT_SECRET || '';
+
 const router = Router();
 
 const transporter = nodemailer.createTransport({
@@ -61,9 +65,33 @@ router.post('/check-code', async (req, res) => {
   console.log(verify)
   if (verify.length === 1){
     await Verify.find({email, code}).deleteMany();
+    const token = jwt.sign({ email }, JWT_SECRET, {expiresIn: '72h'})
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 3*24*60*60*1000
+    })
     res.status(200).json('Verified')
   } else res.status(401).json('Not verified');
 })
+
+router.get('/check-verification', async (req, res) => {
+  const token = req.cookies ? req.cookies.token : 'null';
+  console.log("Hello")
+  console.log(token)
+  console.log("yoyo")
+  if (!token) res.status(401).json({ error: 'Unauthorized' });
+  else {
+    try {
+      const decoded = jwt.verify(token, JWT_SECRET);
+      res.json({ email: decoded });
+    } catch {
+      res.status(403).json({ error: 'Invalid Token' });
+    }
+  }
+
+});
 
 // router.get('/', async (req, res) => {
 //   const emails = await User.find().sort({createdAt: -1});

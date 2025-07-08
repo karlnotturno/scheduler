@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import logger from 'morgan';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ const PORT = process.env.PORT || 3001;
 app.use(logger('dev'));
 app.use(cors({origin: ['https://coffee.kstreet.show', 'http://localhost:5173'], credentials: true}))
 app.use(express.json());
+app.use(cookieParser());
 
 app.get('/', (_req, res) => {
   res.json('Hello strange one!');
