@@ -128,10 +128,8 @@ function Login() {
     setEmail('changing email')
     setTimeout(() => {
       setEmailSendAttempted(false)
-    }, 150)
-    setTimeout(() => {
       setEmail('')
-    }, 160)
+    }, 150)
   }
 
   const verify = async () => {
@@ -153,6 +151,9 @@ function Login() {
         console.log('Verified succesfully:', result);
         deleteEmailCookie();
         setVerified(true);
+        setTimeout(() => {
+          location.href="/"
+        }, 200)
         
       } else {
         const error = await response.json();
